@@ -3,12 +3,17 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/widgets/empty_devices/empty_devices_widget.dart';
 import '/widgets/strength_indicator/strength_indicator_widget.dart';
+import 'dart:math';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -16,7 +21,7 @@ class HomePageWidget extends StatefulWidget {
   const HomePageWidget({
     super.key,
     bool? isBTEnabled,
-  }) : isBTEnabled = isBTEnabled ?? false;
+  }) : this.isBTEnabled = isBTEnabled ?? false;
 
   final bool isBTEnabled;
 
@@ -39,7 +44,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.isBluetoothEnabled = widget.isBTEnabled;
+      _model.isBluetoothEnabled = widget!.isBTEnabled;
       safeSetState(() {});
       if (_model.isBluetoothEnabled) {
         _model.isFetchingConnectedDevices = true;
@@ -114,12 +119,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           elevation: 0.0,
         ),
         body: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
+          padding: EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -127,7 +132,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (!widget.isBTEnabled)
+                  if (!widget!.isBTEnabled)
                     Expanded(
                       child: Text(
                         'Enable your device bluetooth to scan for nearby devices.',
@@ -177,7 +182,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 10.0, 0.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -218,7 +223,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Builder(
                                           builder: (context) {
@@ -227,8 +232,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     .toList();
                                             if (displayConnectedDevcies
                                                 .isEmpty) {
-                                              return const Center(
-                                                child: SizedBox(
+                                              return Center(
+                                                child: Container(
                                                   width: double.infinity,
                                                   height: 50.0,
                                                   child: EmptyDevicesWidget(
@@ -252,7 +257,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     displayConnectedDevcies[
                                                         displayConnectedDevciesIndex];
                                                 return Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 12.0),
                                                   child: InkWell(
@@ -313,7 +318,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     16.0,
                                                                     12.0,
@@ -343,7 +348,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                           .end,
                                                                   children: [
                                                                     Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           8.0,
@@ -385,7 +390,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   ],
                                                                 ),
                                                                 Padding(
-                                                                  padding: const EdgeInsetsDirectional
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           5.0,
@@ -430,7 +435,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 50.0),
                                   child: SingleChildScrollView(
                                     primary: false,
@@ -441,7 +446,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 10.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -528,15 +533,15 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: Builder(
                                             builder: (context) {
                                               final displayDevices =
                                                   _model.foundDevices.toList();
                                               if (displayDevices.isEmpty) {
-                                                return const Center(
-                                                  child: SizedBox(
+                                                return Center(
+                                                  child: Container(
                                                     width: double.infinity,
                                                     height: 50.0,
                                                     child: EmptyDevicesWidget(
@@ -560,7 +565,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                           displayDevicesIndex];
                                                   return Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 12.0),
                                                     child: InkWell(
@@ -633,7 +638,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       16.0,
                                                                       12.0,
@@ -664,7 +669,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             .end,
                                                                     children: [
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             0.0,
                                                                             8.0,
@@ -706,7 +711,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     ],
                                                                   ),
                                                                   Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             5.0,
@@ -760,9 +765,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                       Container(
                         width: double.infinity,
                         height: double.infinity,
-                        decoration: const BoxDecoration(),
+                        decoration: BoxDecoration(),
                         child: Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Text(
                             'Turn on bluetooth to connect with any device',
                             style: FlutterFlowTheme.of(context)

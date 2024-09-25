@@ -614,13 +614,13 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "bleiot",
+      "name": "ble2024",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-09-25T21:06:48.674153Z",
+  "generated": "2024-09-25T21:12:09.735150Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///C:/Users/Admin/Documents/flutter",

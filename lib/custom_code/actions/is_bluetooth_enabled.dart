@@ -11,9 +11,25 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 Future<bool> isBluetoothEnabled() async {
   await Future.delayed(const Duration(milliseconds: 100));
-  final state = await FlutterBluePlus.instance.state.first;
-  if (state == BluetoothState.on) {
-    return true;
+  if (await FlutterBluePlus.isSupported == false) {
+    print("Bluetooth not supported by this device");
+    return false;
   }
-  return false;
+  bool returnme = false;
+  var subscription =
+      FlutterBluePlus.adapterState.listen((BluetoothAdapterState state) {
+    print(state);
+    if (state == BluetoothAdapterState.on) {
+      // usually start scanning, connecting, etc
+      returnme = true;
+    } else {
+      // show an error to the user, etc
+      returnme = false;
+    }
+  });
+  await Future.delayed(const Duration(milliseconds: 100));
+
+  subscription.cancel();
+
+  return returnme;
 }

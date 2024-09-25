@@ -16,7 +16,8 @@ Future sendData(BTDeviceStruct deviceInfo, String data) async {
     for (BluetoothService service in services) {
       for (BluetoothCharacteristic characteristic in service.characteristics) {
         final isWrite = characteristic.properties.write;
-        if (isWrite) {
+        final isNotify = characteristic.properties.notify;
+        if (isWrite && isNotify) {
           await characteristic.write(data.codeUnits);
         }
       }
@@ -24,4 +25,5 @@ Future sendData(BTDeviceStruct deviceInfo, String data) async {
   } catch (e) {
     debugPrint(e.toString());
   }
+  return null;
 }
